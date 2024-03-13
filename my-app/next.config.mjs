@@ -1,9 +1,6 @@
-module.exports = {
-    images: {
-      remotePatterns: [
-        {
-          hostname: 'localhost',
-        },
-      ],
-    },
-  };
+/** @type {import('next').NextConfig} */
+const nextConfig = {};
+
+
+
+export default nextConfig;
