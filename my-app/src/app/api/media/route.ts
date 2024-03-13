@@ -10,11 +10,11 @@ export async function POST(request: NextRequest) {
     requireAuth();
   
     try {
-      // TODO: get the form data from the request
+      //  get the form data from the request
       const formData = await request.formData();
-      // TODO: get the token from the cookie
+      //  get the token from the cookie
       const token = cookies().get('session')?.value;
-      // TODO: send the form data to the upload server. See apiHooks from previous classes.
+      //  send the form data to the upload server. See apiHooks from previous classes.
       const uploadResult = await fetchData<UploadResponse>(
         (process.env.UPLOAD_SERVER as string) + '/upload',
         {
@@ -26,13 +26,13 @@ export async function POST(request: NextRequest) {
         },
       );
   
-      // TODO: if the upload response is valid, add the media to the database
+      //  if the upload response is valid, add the media to the database
       if (!uploadResult.data) {
         return new NextResponse('Error uploading media', { status: 500 });
       }
-      // TODO: get title, description, size and type from the form data
-      // TODO: get the filename from the upload response
-      // TODO: create a media item object, see what postMedia funcion in mediaModel wants for input.
+      //  get title, description, size and type from the form data
+      //  get the filename from the upload response
+      //  create a media item object, see what postMedia funcion in mediaModel wants for input.
   
       if (!formData.get('title') || !formData.get('description')) {
         return new NextResponse('Title and description are required', {
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
         user_id: getSession()?.user_id as number,
       };
 
-    // TODO: use the postMedia function from the mediaModel to add the media to the database. Since we are putting data to the database in the same app, we dont need to use a token.
+    // : use the postMedia function from the mediaModel to add the media to the database. Since we are putting data to the database in the same app, we dont need to use a token.
     const postResult = await postMedia(mediaItem);
 
     if (!postResult) {
